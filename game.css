@@ -1,0 +1,15 @@
+.cardBg{
+    height: 200px;
+    width: 150px;
+    border-radius: 5px;
+}
+
+.bgImg{
+    background-image: url(./assets/images/bck3.jpg);
+    background-size: cover;
+}
+
+.tan{
+    background-color: rgba(190, 190, 190, 0.751);
+    height: 110vh;
+}
