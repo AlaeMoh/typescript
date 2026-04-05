@@ -17,8 +17,12 @@ function playAudio(): void {
 
 function muteAudio() {
   const btn = document.getElementById("btn") as HTMLElement | null;
-  btn?.addEventListener("click", () => {
-    if (bgAudio.volume === 0) {
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    const isMuted = bgAudio.volume === 0;
+
+    if (isMuted) {
       bgAudio.volume = 0.5;
       btn.innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
     } else {
@@ -59,7 +63,7 @@ function imageFlip(): void {
       if (img.classList.contains("matched")) return; 
 
       flip.play();
-
+      
       img.src = `./assets/images/${img.dataset.value}.jpg`;
 
       if (!firstImg) {
@@ -73,23 +77,16 @@ function imageFlip(): void {
     });
   });
 }
-    const progress= document.getElementById("progressBar") as HTMLDivElement;
-    let currentProgress = 0;
-    const step = 100/6;
+
   function checkMatch(): void {
-    const gameOver = new Audio('./assets/audio/game-over.mp3');
+    const gameOver = new Audio('./assets/audio/win.wav');
 
   if (!firstImg || !secondImg) return;
 
   if (firstImg.dataset.value === secondImg.dataset.value) {
     win.play();
-     currentProgress += step;
-    progress.style.width= currentProgress +"%"
-
-
     firstImg.classList.add("matched");
     secondImg.classList.add("matched");
-
 
     const images = document.querySelectorAll<HTMLImageElement>('img');
     const allMatched = Array.from(images).every(img => img.classList.contains("matched"));

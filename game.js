@@ -14,8 +14,11 @@ function playAudio() {
 }
 function muteAudio() {
     const btn = document.getElementById("btn");
-    btn?.addEventListener("click", () => {
-        if (bgAudio.volume === 0) {
+    if (!btn)
+        return;
+    btn.addEventListener("click", () => {
+        const isMuted = bgAudio.volume === 0;
+        if (isMuted) {
             bgAudio.volume = 0.5;
             btn.innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
         }
@@ -63,17 +66,12 @@ function imageFlip() {
         });
     });
 }
-const progress = document.getElementById("progressBar");
-let currentProgress = 0;
-const step = 100 / 6;
 function checkMatch() {
-    const gameOver = new Audio('./assets/audio/game-over.mp3');
+    const gameOver = new Audio('./assets/audio/win.wav');
     if (!firstImg || !secondImg)
         return;
     if (firstImg.dataset.value === secondImg.dataset.value) {
         win.play();
-        currentProgress += step;
-        progress.style.width = currentProgress + "%";
         firstImg.classList.add("matched");
         secondImg.classList.add("matched");
         const images = document.querySelectorAll('img');
